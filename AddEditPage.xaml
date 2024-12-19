@@ -1,0 +1,131 @@
+﻿<Page x:Class="_13.AddEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_13"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditPage" FontFamily="Century Gothic">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Row="7" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                <TextBlock Text="История " Margin="0,0,5,0" FontSize="20" />
+                <ComboBox Name="Realze" DisplayMemberPath="Datacount" SelectedValuePath="AgentID" Width="200" FontSize="15"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                <TextBlock Text="Список товаров:" Margin="0,0,5,0" FontSize="15"/>
+                <ComboBox Name="Products" DisplayMemberPath="Title" SelectedValuePath="ID"  FontSize="12"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="searchprod" TextChanged="searchprod_TextChanged" Width="280" FontSize="15" LostFocus="searchprod_LostFocus"/>
+                <Popup x:Name="suggestionsPopup" StaysOpen="False" PlacementTarget="{Binding ElementName=searchprod}" Placement="Bottom" AllowsTransparency="True">
+                    <ListBox x:Name="suggestionsList" SelectionChanged="suggestionsList_SelectionChanged" Background="White" BorderBrush="LightGray" BorderThickness="1"/>
+                </Popup>
+            </StackPanel>
+
+            <StackPanel>
+                <Label x:Name="ProductCountLabel" FontSize="15"/>
+                <TextBox x:Name="ProductCountTB"  GotFocus="ProductCountTB_GotFocus"  LostFocus="ProductCountTB_LostFocus"/>
+                <DatePicker Name="saleData" />
+				<Button Name="add" Click="add_Click" Content="Добавить продажу" Width="200" HorizontalAlignment="Left"/>
+				<Button Name="delete" Click="delete_Click_1" Content="Удалить продажу" Width="200" HorizontalAlignment="Left" />
+            </StackPanel>
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Наименование" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5"></TextBlock>
+            <TextBox Text="{Binding Title}" FontSize="15" Height="20"  Width="400"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Адрес" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5" ></TextBlock>
+            <TextBox Text="{Binding Address}" FontSize="15" Height="20" Width="500"  ></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="Директор" FontSize="15" Height="20" MinWidth="120" Width="auto" Margin="5" ></TextBlock>
+            <TextBox Text="{Binding DirectorName}"  FontSize="15" Height="20" Width="400"  ></TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical" Grid.RowSpan="4">
+            <TextBlock Text="Логотип"  FontSize="15" Height="20" Width="auto" Margin="5"></TextBlock>
+            <Image Name="Logo" Width="200" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
+                <Image.Source>
+                    <Binding Path="Logo">
+                        <Binding.TargetNullValue>
+                            <ImageSource>
+                                agents\picture.png
+                            </ImageSource>
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </Image.Source>
+            </Image>
+            <Button Content="Изменить" Name="ChangePicture" Click="ChangePicture_Click" Height="40"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Name="ComboType" Text="Тип агента" FontSize="15" Height="20" Width="100" Margin="5" ></TextBlock>
+            <ComboBox Name="AgentTypeComboBox"  DisplayMemberPath="Title" SelectedValuePath="ID" SelectedValue="{Binding AgentTypeID}" Width="200" Height="25" Margin="10" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Приоритет" FontSize="15" Height="20" Width="100" Margin="5"></TextBlock>
+            <TextBox Text="{Binding Priority}"  FontSize="15" Height="20" Width="100" ></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="ИНН" FontSize="15" Height="20" Width="100" Margin="5" ></TextBlock>
+            <TextBox Text="{Binding INN}" FontSize="15" Height="20" Width="100" ></TextBox>
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal">
+            <TextBlock Text="КПП" FontSize="15" Height="20" Width="100" Margin="5"></TextBlock>
+            <TextBox Text="{Binding KPP}"  FontSize="15" Height="20" Width="100" ></TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="4" Orientation="Horizontal">
+            <TextBlock Text="Телефон"  FontSize="15" Height="20" Width="100" Margin="5"></TextBlock>
+            <TextBox Text="{Binding Phone}" FontSize="15" Height="20" Width="200" ></TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="e-mail" FontSize="15" Height="20" Width="100" Margin="5" ></TextBlock>
+            <TextBox Text="{Binding Email}"  FontSize="15" Height="20" Width="200" ></TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal">
+            <Button Name="save" Content="Сохранить" Grid.Column="1" Click="save_Click"  Margin="5"></Button>
+            <Button Name="Delete" Content="Удалить" Click="Delete_Click"  Margin="5" Opacity="{Binding ID}"></Button>
+        </StackPanel>
+
+    </Grid>
+</Page>
